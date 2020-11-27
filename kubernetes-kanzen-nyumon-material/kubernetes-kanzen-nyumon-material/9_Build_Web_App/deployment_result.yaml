@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: result
+  name: result
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: result
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: result
+    spec:
+      containers:
+      - image: dockersamples/examplevotingapp_result:before
+        name: result
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}

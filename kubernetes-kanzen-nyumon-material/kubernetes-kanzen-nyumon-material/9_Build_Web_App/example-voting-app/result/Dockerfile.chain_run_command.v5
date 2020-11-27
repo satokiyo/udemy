@@ -1,0 +1,31 @@
+FROM node:10-slim
+
+# コンテナが起動した時のWORKDIRを指定
+WORKDIR /app
+
+RUN npm install -g nodemon
+
+# package.jsonのみ最初にコピーし、パッケージがインストールされたキャッシュレイヤーを作る
+COPY --chown=node:node package*.json ./
+
+# RUN && でレイヤー数を圧縮  <---- changed
+RUN npm ci \
+ && npm cache clean --force \
+ && mv /app/node_modules /node_modules
+
+# 環境変数を設定
+# Non-privileged user (not root) can't open a listening socket on ports below 1024
+# ref: https://stackoverflow.com/questions/9164915/node-js-eacces-error-when-listening-on-most-ports
+ENV PORT 8080
+
+EXPOSE 8080
+
+# 最後に全てのファイルをにコピー & /appのパミッションとOwnerを設定
+# chown & chmod はレイヤーサイズを倍にするので使うべからず！　代わりにCOPY --chownを使う
+COPY --chown=node:node . .
+
+# コンテナを起動した時のプロセスのOwnerを指定
+USER node
+
+# コンテナが起動した時のコマンドを指定
+CMD ["node", "server.js"]

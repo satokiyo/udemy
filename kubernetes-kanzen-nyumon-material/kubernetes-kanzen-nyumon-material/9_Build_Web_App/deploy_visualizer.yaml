@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: visualizer
+  name: visualizer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: visualizer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: visualizer
+    spec:
+      containers:
+      - image: dockersamples/visualizer:stable
+        name: visualizer
+        ports:
+        - containerPort: 8080
+        resources: {}
+status: {}
