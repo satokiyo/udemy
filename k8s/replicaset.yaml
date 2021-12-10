@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld
+#    tier: frontend
+spec:
+  # modify replicas according to your case
+  replicas: 2
+  selector:
+    matchLabels:
+      app: helloworld
+#      tier: helloworld
+#    matchExpressions:
+#      - {key: tier, operator: In, values: [frontend]}
+  template:
+    metadata:
+      labels:
+        app: helloworld
+#        tier: helloworld
+    spec:
+      containers:
+      - name: helloworld
+        image: gcr.io/google_samples/hello-app:1.0
+ #       resources:
+ #         requests:
+ #           cpu: 100m
+ #           memory: 100Mi
+ #       env:
+ #       - name: GET_HOSTS_FROM
+ #         value: dns
+ #         # If your cluster config does not include a dns service, then to
+ #         # instead access environment variables to find service host
+ #         # info, comment out the 'value: dns' line above, and uncomment the
+ #         # line below.
+ #         # value: env
+ #       ports:
+ #       - containerPort: 80

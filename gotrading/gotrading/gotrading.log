@@ -1,0 +1,104 @@
+2021/12/05 18:50:45 main.go:14: test
+2021/12/06 15:30:15 main.go:15: test
+2021/12/06 15:30:16 bitflyer.go:58: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/06 15:30:16 bitflyer.go:33: 1638772216
+2021/12/06 15:30:16 bitflyer.go:93: url=me/getbalance resp={"status":-500,"error_message":"Key not found","data":null}
+2021/12/06 15:30:16 bitflyer.go:100: action=GetBalance err=json: cannot unmarshal object into Go value of type []bitflyer.Balance
+2021/12/06 15:31:01 main.go:15: test
+2021/12/06 15:31:01 bitflyer.go:58: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/06 15:31:01 bitflyer.go:33: 1638772261
+2021/12/06 15:32:13 bitflyer.go:93: url=me/getbalance resp={"status":-500,"error_message":"Key not found","data":null}
+2021/12/06 15:32:23 bitflyer.go:100: action=GetBalance err=json: cannot unmarshal object into Go value of type []bitflyer.Balance
+2021/12/06 15:33:52 main.go:15: test
+2021/12/06 15:33:53 bitflyer.go:58: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/06 15:33:53 bitflyer.go:33: 1638772433
+2021/12/07 17:11:09 main.go:15: test
+2021/12/07 17:11:09 bitflyer.go:58: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/07 17:11:09 bitflyer.go:33: 1638864669
+2021/12/07 17:11:09 bitflyer.go:93: url=me/getbalance resp={"status":-500,"error_message":"Key not found","data":null}
+2021/12/07 17:11:09 bitflyer.go:100: action=GetBalance err=json: cannot unmarshal object into Go value of type []bitflyer.Balance
+2021/12/07 17:12:53 main.go:16: test
+2021/12/07 17:12:53 bitflyer.go:58: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/07 17:12:53 bitflyer.go:33: 1638864773
+2021/12/07 17:12:54 bitflyer.go:93: url=me/getbalance resp={"status":-500,"error_message":"Key not found","data":null}
+2021/12/07 17:12:54 bitflyer.go:100: action=GetBalance err=json: cannot unmarshal object into Go value of type []bitflyer.Balance
+2021/12/07 17:12:54 bitflyer.go:58: action=doRequest endpoint=https://api.bitflyer.com/v1/ticker
+2021/12/07 17:12:54 bitflyer.go:33: 1638864774
+2021/12/07 17:12:54 bitflyer.go:128: action=DateTime, err=parsing time "2021-12-07T08:12:53.89" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 17:12:54 bitflyer.go:128: action=DateTime, err=parsing time "2021-12-07T08:12:53.89" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 17:35:14 main.go:16: test
+2021/12/07 17:35:14 bitflyer.go:61: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/07 17:35:14 bitflyer.go:36: 1638866114
+2021/12/07 17:35:15 bitflyer.go:96: url=me/getbalance resp={"status":-500,"error_message":"Key not found","data":null}
+2021/12/07 17:35:15 bitflyer.go:103: action=GetBalance err=json: cannot unmarshal object into Go value of type []bitflyer.Balance
+2021/12/07 17:35:15 bitflyer.go:61: action=doRequest endpoint=https://api.bitflyer.com/v1/ticker
+2021/12/07 17:35:15 bitflyer.go:36: 1638866115
+2021/12/07 17:35:15 bitflyer.go:132: action=DateTime, err=parsing time "2021-12-07T08:35:15.35" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 17:35:15 bitflyer.go:132: action=DateTime, err=parsing time "2021-12-07T08:35:15.35" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 17:35:15 bitflyer.go:218: connecting to wss://ws.lightstream.bitflyer.com/json-rpc
+2021/12/07 17:38:04 main.go:16: test
+2021/12/07 17:38:04 bitflyer.go:61: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/07 17:38:04 bitflyer.go:36: 1638866284
+2021/12/07 17:38:05 bitflyer.go:96: url=me/getbalance resp={"status":-500,"error_message":"Key not found","data":null}
+2021/12/07 17:38:05 bitflyer.go:103: action=GetBalance err=json: cannot unmarshal object into Go value of type []bitflyer.Balance
+2021/12/07 17:38:05 bitflyer.go:61: action=doRequest endpoint=https://api.bitflyer.com/v1/ticker
+2021/12/07 17:38:05 bitflyer.go:36: 1638866285
+2021/12/07 17:38:05 bitflyer.go:132: action=DateTime, err=parsing time "2021-12-07T08:38:04.573" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 17:38:05 bitflyer.go:132: action=DateTime, err=parsing time "2021-12-07T08:38:04.573" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 17:38:05 bitflyer.go:218: connecting to wss://ws.lightstream.bitflyer.com/json-rpc
+2021/12/07 18:11:29 main.go:17: test
+2021/12/07 18:11:29 bitflyer.go:60: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/07 18:11:29 bitflyer.go:36: 1638868289
+2021/12/07 18:11:29 bitflyer.go:95: url=me/getbalance resp={"status":-500,"error_message":"Key not found","data":null}
+2021/12/07 18:11:29 bitflyer.go:102: action=GetBalance err=json: cannot unmarshal object into Go value of type []bitflyer.Balance
+2021/12/07 18:11:29 bitflyer.go:60: action=doRequest endpoint=https://api.bitflyer.com/v1/ticker
+2021/12/07 18:11:29 bitflyer.go:36: 1638868289
+2021/12/07 18:11:29 bitflyer.go:130: action=DateTime, err=parsing time "2021-12-07T09:11:29.74" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 18:11:29 bitflyer.go:130: action=DateTime, err=parsing time "2021-12-07T09:11:29.74" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 18:11:29 bitflyer.go:215: connecting to wss://ws.lightstream.bitflyer.com/json-rpc
+2021/12/07 18:12:20 main.go:17: test
+2021/12/07 18:12:20 bitflyer.go:60: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/07 18:12:20 bitflyer.go:36: 1638868340
+2021/12/07 18:12:21 bitflyer.go:95: url=me/getbalance resp={"status":-500,"error_message":"Key not found","data":null}
+2021/12/07 18:12:21 bitflyer.go:102: action=GetBalance err=json: cannot unmarshal object into Go value of type []bitflyer.Balance
+2021/12/07 18:12:21 bitflyer.go:60: action=doRequest endpoint=https://api.bitflyer.com/v1/ticker
+2021/12/07 18:12:21 bitflyer.go:36: 1638868341
+2021/12/07 18:12:21 bitflyer.go:130: action=DateTime, err=parsing time "2021-12-07T09:12:19.933" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 18:12:21 bitflyer.go:130: action=DateTime, err=parsing time "2021-12-07T09:12:19.933" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 18:12:21 bitflyer.go:215: connecting to wss://ws.lightstream.bitflyer.com/json-rpc
+2021/12/07 18:12:55 main.go:17: test
+2021/12/07 18:12:55 bitflyer.go:60: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/07 18:12:55 bitflyer.go:36: 1638868375
+2021/12/07 18:12:56 bitflyer.go:95: url=me/getbalance resp={"status":-500,"error_message":"Key not found","data":null}
+2021/12/07 18:12:56 bitflyer.go:102: action=GetBalance err=json: cannot unmarshal object into Go value of type []bitflyer.Balance
+2021/12/07 18:12:56 bitflyer.go:60: action=doRequest endpoint=https://api.bitflyer.com/v1/ticker
+2021/12/07 18:12:56 bitflyer.go:36: 1638868376
+2021/12/07 18:12:56 bitflyer.go:130: action=DateTime, err=parsing time "2021-12-07T09:12:55.757" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 18:12:56 bitflyer.go:130: action=DateTime, err=parsing time "2021-12-07T09:12:55.757" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 18:14:32 main.go:17: test
+2021/12/07 18:14:32 bitflyer.go:60: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/07 18:14:32 bitflyer.go:36: 1638868472
+2021/12/07 18:14:33 bitflyer.go:95: url=me/getbalance resp={"status":-500,"error_message":"Key not found","data":null}
+2021/12/07 18:14:33 bitflyer.go:102: action=GetBalance err=json: cannot unmarshal object into Go value of type []bitflyer.Balance
+2021/12/07 18:14:33 bitflyer.go:60: action=doRequest endpoint=https://api.bitflyer.com/v1/ticker
+2021/12/07 18:14:33 bitflyer.go:36: 1638868473
+2021/12/07 18:14:33 bitflyer.go:130: action=DateTime, err=parsing time "2021-12-07T09:14:33.213" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 18:14:33 bitflyer.go:130: action=DateTime, err=parsing time "2021-12-07T09:14:33.213" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 18:15:37 main.go:17: test
+2021/12/07 18:15:37 bitflyer.go:60: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/07 18:15:37 bitflyer.go:36: 1638868537
+2021/12/07 18:15:37 bitflyer.go:95: url=me/getbalance resp={"status":-500,"error_message":"Key not found","data":null}
+2021/12/07 18:15:37 bitflyer.go:102: action=GetBalance err=json: cannot unmarshal object into Go value of type []bitflyer.Balance
+2021/12/07 18:15:37 bitflyer.go:60: action=doRequest endpoint=https://api.bitflyer.com/v1/ticker
+2021/12/07 18:15:37 bitflyer.go:36: 1638868537
+2021/12/07 18:15:37 bitflyer.go:130: action=DateTime, err=parsing time "2021-12-07T09:15:33.693" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 18:15:37 bitflyer.go:130: action=DateTime, err=parsing time "2021-12-07T09:15:33.693" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 18:16:13 main.go:17: test
+2021/12/07 18:16:13 bitflyer.go:60: action=doRequest endpoint=https://api.bitflyer.com/v1/me/getbalance
+2021/12/07 18:16:13 bitflyer.go:36: 1638868573
+2021/12/07 18:16:14 bitflyer.go:95: url=me/getbalance resp={"status":-500,"error_message":"Key not found","data":null}
+2021/12/07 18:16:14 bitflyer.go:102: action=GetBalance err=json: cannot unmarshal object into Go value of type []bitflyer.Balance
+2021/12/07 18:16:14 bitflyer.go:60: action=doRequest endpoint=https://api.bitflyer.com/v1/ticker
+2021/12/07 18:16:14 bitflyer.go:36: 1638868574
+2021/12/07 18:16:14 bitflyer.go:130: action=DateTime, err=parsing time "2021-12-07T09:16:13.493" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
+2021/12/07 18:16:14 bitflyer.go:130: action=DateTime, err=parsing time "2021-12-07T09:16:13.493" as "2006-01-02T15:04:05Z07:00": cannot parse "" as "Z07:00"
