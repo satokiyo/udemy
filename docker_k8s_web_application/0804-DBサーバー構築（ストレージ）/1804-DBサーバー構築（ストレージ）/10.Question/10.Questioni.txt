@@ -1,0 +1,14 @@
+実装
+1. 以下のファイルを作成
+    weblog-db-storage.yml
+
+
+確認
+※必要なフォルダが作成されていること
+
+1. PersistentVolume、PersistentVolumeClaimを作成
+2. 作成したリソースを確認
+
+
+
+

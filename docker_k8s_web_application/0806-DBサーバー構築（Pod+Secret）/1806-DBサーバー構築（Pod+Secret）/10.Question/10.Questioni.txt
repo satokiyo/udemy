@@ -1,0 +1,20 @@
+実装
+1. keyfile（ランダム文字列）を作成
+2. Secretリソースを作成
+3. SecretリソースのYAMLを取得
+4. weblog-db-pod.ymlへマージ
+5. Secretリソースを削除
+
+
+確認
+※必要なフォルダが作成されていること
+※作成されたフォルダは空であること
+
+1. PersistentVolume, Pod, Secretを作成
+2. 作成したPodへ入る
+3. MongoDBへ接続
+4. 設定したユーザー名/パスワードで認証
+5. DB一覧を表示
+
+
+

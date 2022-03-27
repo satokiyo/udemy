@@ -1,0 +1,17 @@
+実装
+1. 以下の3ファイルを作成
+      mongodb-org-4.0.repo
+      Dockerfile
+      debug-pod.yml
+
+
+確認
+  Docker
+    1. Dockerで作成したイメージを実行
+    2. 実行中コンテナに入る
+    3. 必要なコマンドが実行可能なことを確認
+
+  Kubernetes
+    1. Podを作成
+
+

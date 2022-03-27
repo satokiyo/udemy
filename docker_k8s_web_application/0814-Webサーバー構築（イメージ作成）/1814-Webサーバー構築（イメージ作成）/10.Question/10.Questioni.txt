@@ -1,0 +1,16 @@
+実装
+1. 以下のファイルを作成
+    ROOT
+      docker-entrypoint.sh
+      Dockerfile
+
+  ※nginx.confは添付を利用
+
+確認
+※Kubernetes上でDBサーバーとAPサーバーが起動していること
+
+1. APサーバーへアクセスするServiceを作成
+2. Webサーバーコンテナ起動
+3. 外部からブラウザでアクセスして画面確認
+
+

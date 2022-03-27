@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: default
+  labels:
+    app: weblog
+    type: frontend
+spec:
+  containers:
+  - name: nginx
+    image: weblog-web:v1.0.0
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 80
+    env:
+    - name: "APPLICATION_HOST"
+      value: "app-svc:3000"

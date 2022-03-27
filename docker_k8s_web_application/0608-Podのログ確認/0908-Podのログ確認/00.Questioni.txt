@@ -1,0 +1,8 @@
+1. CentOS と nginx のPodを起動（作成済のマニフェストを利用）
+2. CentOS と nginx の状態を確認
+3. CentOS に入る
+4. curl で nginx にアクセス
+5. CentOS から出る
+6. nginx のログを確認
+7. CentOS と nginx の Podを削除
+

@@ -1,0 +1,17 @@
+実装
+1. 以下のファイルを作成
+    weblog-db-statefulset.yml
+
+
+確認
+※必要なフォルダが作成されていること
+※作成されたフォルダは空であること
+
+1. PersistentVolume, Secret, StatefulSetを作成
+2. 作成したPodへ入る
+3. MongoDBへ接続
+4. 設定したユーザー名/パスワードで認証
+5. DB一覧を表示
+
+
+

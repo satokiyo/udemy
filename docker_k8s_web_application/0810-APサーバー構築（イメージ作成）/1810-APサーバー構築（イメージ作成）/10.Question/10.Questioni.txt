@@ -1,0 +1,35 @@
+実装
+1. 以下のファイルを作成
+    
+    ROOT
+    │
+    │ .dockerignore
+    │ docker-entrypoint.sh
+    │ Dockerfile
+    │
+    │    --- 以下は Node.js アプリ Application フォルダに配置---
+    │ app.js
+    │ package.json
+    │ yarn.lock
+    │
+    ├─ api
+    ├─ config
+    ├─ lib
+    ├─ log
+    ├─ public
+    ├─ routes
+    └─ views
+
+
+確認
+※DBサーバーが起動して初期化まで済んでいること
+
+1. MongoDBのプライマリを確認
+2. MongoDBに対するService, Endpointsを作成（kubectl apply）
+3. Dockerで作成したイメージを実行（docker run）
+4. 作成したNode.jsアプリケーションコンテナへ接続（curl）
+5. MongoDB接続用Service, Endpointsを削除（kubectl delete）
+
+
+
+

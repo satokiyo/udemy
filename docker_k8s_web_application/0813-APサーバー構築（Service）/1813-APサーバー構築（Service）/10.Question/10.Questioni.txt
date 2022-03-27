@@ -1,0 +1,15 @@
+実装
+1. 以下のファイルを作成
+    weblog-app-fullset.yml
+
+
+確認
+※DBサーバーが起動して初期化まで済んでいること
+
+1. Secret, Deployment, Serviceを作成（kubectl apply）
+2. デバッグPodを作成して入る（kubectl exec）
+3. APサーバーへService経由で接続（curl）
+4. APサーバーのいずれかにログ出力されていることを確認
+
+
+

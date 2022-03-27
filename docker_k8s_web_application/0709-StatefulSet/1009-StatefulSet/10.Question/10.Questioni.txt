@@ -1,0 +1,3 @@
+StatefulSetの作成
+1. StatefulSetおよびServiceのマニフェストを作成
+2. デバッグ用PodからService経由でPodにアクセス

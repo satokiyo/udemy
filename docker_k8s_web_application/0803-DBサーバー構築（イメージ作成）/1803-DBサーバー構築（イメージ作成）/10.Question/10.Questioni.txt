@@ -1,0 +1,14 @@
+実装
+1. 以下の3ファイルを作成
+      .dockerignore
+      docker-entrypoint.sh
+      Dockerfile
+
+
+確認
+1. Dockerで作成したイメージを実行
+2. 実行中コンテナに入る
+3. MongoDBに接続できることを確認
+
+
+

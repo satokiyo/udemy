@@ -1,0 +1,14 @@
+実装
+1. 以下のファイルを作成
+    weblog-web-fullset.yml
+
+
+確認
+※DBサーバーが起動して初期化まで済んでいること
+※APサーバーが起動していること
+
+1. ConfigMap, Deploymentを作成（kubectl apply）
+2. デバッグPodを作成して入る（kubectl exec）
+3. WebサーバーServiceへ接続確認（curl）
+
+

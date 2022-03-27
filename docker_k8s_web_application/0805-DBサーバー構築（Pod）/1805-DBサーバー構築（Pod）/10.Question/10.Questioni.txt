@@ -1,0 +1,17 @@
+実装
+1. 以下のファイルを作成
+    weblog-db-pod.yml
+
+
+確認
+※必要なフォルダが作成されていること
+※作成されたフォルダは空であること
+
+1. PersistentVolume, PersistentVolumeClaim, Podを作成
+2. MongoDBのファイルが作成されていることを確認
+3. 作成したPodへ入る
+4. MongoDBへ接続確認
+
+
+
+

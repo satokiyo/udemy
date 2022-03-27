@@ -1,0 +1,4 @@
+ConfigMap作成
+1. ConfigMapとPodを含むマニフェストファイル作成
+2. リソース作成
+3. Podに入ってConfigMapが接続されていることを確認

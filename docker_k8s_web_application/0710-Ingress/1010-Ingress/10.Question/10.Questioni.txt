@@ -1,0 +1,4 @@
+Ingressの作成
+1. Deployment, Service を準備
+2. Ingress を作成
+3. 外部からアクセス
