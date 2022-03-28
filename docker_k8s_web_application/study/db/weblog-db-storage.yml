@@ -18,6 +18,21 @@ spec:
 
 ---
 apiVersion: v1
+kind: Secret
+metadata:
+  name: mongo-secret
+  namespace: default
+  labels:
+    app: weblog
+    type: database
+type: Opaque
+data:
+  root_password: UGFzc3cwcmQ=
+  root_username: YWRtaW4=
+  keyfile: YzNwSDZpd2F5eWZrK1pmUjVHU051Mk9yNW5BdVk5ejNGbmtSOWtiRURzVHBUaTUrdUtVdVpZSklNaVhkWEhmbDZGV2VhK29iTlRDbk1NM0thK2tCMW8vWW9VZTc3UnJrYTR2L2ZZM0lWZnVZbEZOUDV4TkdnTmNKNm1LeWs1cUVleXVpQUFnbzZBclhVaXQyNEZkM1pRQm5RUEdYYlFDRGx1c0kyRTVtbGZ0MG9venNDK01lUVlnNloxNktsVlRjYUV4Nkk3UFBUem1jbzJUdGdiaGJUeS9qZVk5TDFJdWtyb1JTU0QyUFBOUjZJcDRUQ0E5MzR1L3d1c3VicHYrQ2NDdVZFV2tNVVhjeVp2bWdMd3FDazlqbEZqdjNDN3NiVmpkNWVlaGREbWhrVUpFbWI4c1JFb1N2cEdGdlF6cWx2S20xeHNHS2RwUG1YUWM3NjI4bERaYjNyU1J6bnF0S2VlaUJ5Ym1YUDVuZEkwb0FYNjExQWVWcDYxeXJ4VlE3d1FXckNjZDlKTXowaWZub0QxUUt0QUpCTDdMN1FhTkJwdXN1Yis0YW0wMW90VFBKMTV3UkdFUlgrUkhnT1Rtb0tHRlJ2bW40WDl6RFdPQkYvUVdWMXlaMFBIWXhTTFRHK09LOGxrOUdxYkxCditMTWhDUHU4Ull0eGhIYUpsTVVBVUtVeS9lQUNOUmFnYklSVUF2dnNlV0ozRno0VklzbktEREVycndPakRXbHNXbWhqSmpkellsZ1Y3UDRFTWJqeTN2aGE1M1NjVVgyTWk4N2xlaWQwalVYR3QzSHNzY1EzcHVlZXJtNFFXNGRBaUwzRUUzVkJOblhtYU8wSDFSeWl0WEVNT0hvbFp2eXkwUFRJTUdaQ3FISUVmeSt4ZTR6NUR4Nm5PNlEwT0dib2o1SXE1aXdNNnAzVU1wRmJPdU51UkZrdzVlMWZOVTVWblg2Y255b0Q5U3hsRGF4TU5WWjJ5OGJFUVJITTNKTUtwTVgvWFR3bXN1YnVYV2ptTTBsamhvS0d4Yk4rcXkybGdxbURmaDVKSWtnUFJKMjRQQUx2UHRnWFBteVRMRloyYzFvZSt3eVVvbUgxU1VXdWsrY0pPS1ErZWNzOHZjWmVnUXlyNU1TRVRKU21yUEgwbVQ4eFlheWdUVzc3VFZYb1QrTEtRTlVCUkZ1MTVQMWNRMUlkUEUrb1VjVUVIM3dVTFU1TlR3QTFaVm8yUjlMY2F6eFVPTStQS0JvSHdoWTZOSGZTSDQ2MGJkT1huWiswZDdlZjlCNUdSZ2dXdjhjcVdRd3pUbDNZN0dQNjBodUVWZjNHMXArcWRtWTNmUFY4dDVFT2ZXKzhucFNTOTZqUFFnNQo=
+
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: storage-claim
@@ -46,13 +61,36 @@ spec:
     - name: mongodb
       image: weblog-db:v1.0.0
       imagePullPolicy: Never
-      command: # 以下がDockerfileでENTRYPOINTに指定した.shの引数として渡されるはず
+      args: # 以下がDockerfileでENTRYPOINTに指定した.shの引数として渡されるはず
         - "mongod"
+        - "--auth"
         - "--bind_ip_all"
+      env:
+        - name: "MONGO_INITDB_ROOT_USERNAME"
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: root_username
+        - name: "MONGO_INITDB_ROOT_PASSWORD"
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: root_password
+        - name: "MONGO_INITDB_DATABASE"
+          value: "admin"
       volumeMounts:
         - mountPath: /data/db # mongoコンテナの中のパス
           name: storage
+        - mountPath: /home/mongodb # mongoコンテナの中のパス
+          name: secret
   volumes:
     - name: storage
       persistentVolumeClaim:
         claimName: storage-claim
+    - name: secret
+      secret:
+        secretName: mongo-secret
+        items:
+          - key: keyfile
+            path: keyfile
+            mode: 0700
