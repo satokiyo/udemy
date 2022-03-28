@@ -50,10 +50,10 @@ if [ ! -e ${INIT_FLAG_FILE} ]; then
   echo 
   echo "--- Initialize MongoDB ---"
   echo 
-  start_mongod_as_daemon()
-  create_user()
-  create_initialize_flag()
-  stop_mongod()
+  start_mongod_as_daemon
+  create_user
+  create_initialize_flag
+  stop_mongod
 fi
 
 exec "$@"

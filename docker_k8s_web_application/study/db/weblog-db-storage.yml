@@ -13,7 +13,7 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/data/storage"
+    path: "/data/storage" # minikubeにこのディレクトリを作成しておく
     type: Directory
 
 ---
@@ -46,11 +46,11 @@ spec:
     - name: mongodb
       image: weblog-db:v1.0.0
       imagePullPolicy: Never
-      command:
+      command: # 以下がDockerfileでENTRYPOINTに指定した.shの引数として渡されるはず
         - "mongod"
         - "--bind_ip_all"
       volumeMounts:
-        - mountPath: /data/db
+        - mountPath: /data/db # mongoコンテナの中のパス
           name: storage
   volumes:
     - name: storage
