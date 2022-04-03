@@ -10,6 +10,13 @@ spec:
       image: debug
       # not from dockerhub
       imagePullPolicy: Never
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "100m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
       command:
         - "sh"
         - "-c"

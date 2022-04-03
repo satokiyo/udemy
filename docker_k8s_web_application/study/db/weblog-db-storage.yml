@@ -48,8 +48,8 @@ spec:
       storage: 1Gi
 
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: StatefulSet # Pod
 metadata:
   name: mongodb
   namespace: default
@@ -57,40 +57,72 @@ metadata:
     app: weblog
     type: database
 spec:
-  containers:
-    - name: mongodb
-      image: weblog-db:v1.0.0
-      imagePullPolicy: Never
-      args: # 以下がDockerfileでENTRYPOINTに指定した.shの引数として渡されるはず
-        - "mongod"
-        - "--auth"
-        - "--bind_ip_all"
-      env:
-        - name: "MONGO_INITDB_ROOT_USERNAME"
-          valueFrom: # reference to secret resource
-            secretKeyRef:
-              name: mongo-secret
-              key: root_username
-        - name: "MONGO_INITDB_ROOT_PASSWORD"
-          valueFrom: # reference to secret resource
-            secretKeyRef:
-              name: mongo-secret
-              key: root_password
-        - name: "MONGO_INITDB_DATABASE"
-          value: "admin"
-      volumeMounts:
-        - mountPath: /data/db # mongoコンテナの中のパス
+  selector:
+    matchLabels:
+      app: weblog
+      type: database
+  serviceName: db-svc
+  template:
+    metadata: # ここから下が最初Podだったもの
+      name: mongodb
+      namespace: default
+      labels:
+        app: weblog
+        type: database
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: mongodb
+          image: weblog-db:v1.0.0
+          imagePullPolicy: Never
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          args: # 以下がDockerfileでENTRYPOINTに指定した.shの引数として渡されるはず
+            - "mongod"
+            - "--auth"
+            - "--bind_ip_all"
+          env:
+            - name: "MONGO_INITDB_ROOT_USERNAME"
+              valueFrom: # reference to secret resource
+                secretKeyRef:
+                  name: mongo-secret
+                  key: root_username
+            - name: "MONGO_INITDB_ROOT_PASSWORD"
+              valueFrom: # reference to secret resource
+                secretKeyRef:
+                  name: mongo-secret
+                  key: root_password
+            - name: "MONGO_INITDB_DATABASE"
+              value: "admin"
+          volumeMounts:
+            - mountPath: /data/db # mongoコンテナの中のパス
+              name: storage
+            - mountPath: /home/mongodb # mongoコンテナの中のパス
+              name: secret
+      volumes:
+        #- name: storage
+        #  persistentVolumeClaim:
+        #    claimName: storage-claim
+        - name: secret
+          secret: # volumeとして、上記のようなPVCだけでなく、secretリソースも(--from-fileでエンコード化したsecret dataのファイルとして)マウントできる！
+            secretName: mongo-secret
+            items:
+              - key: keyfile
+                path: keyfile
+                mode: 0700
+
+    volumeClaimTemplates:
+      - metadata:
           name: storage
-        - mountPath: /home/mongodb # mongoコンテナの中のパス
-          name: secret
-  volumes:
-    - name: storage
-      persistentVolumeClaim:
-        claimName: storage-claim
-    - name: secret
-      secret: # volumeとして、上記のようなPVCだけでなく、secretリソースも(--from-fileでエンコード化したsecret dataのファイルとして)マウントできる！
-        secretName: mongo-secret
-        items:
-          - key: keyfile
-            path: keyfile
-            mode: 0700
+        spec:
+          storageClassName: slow
+          accessModes:
+            - ReadWriteMany
+          resources:
+            requests:
+              storage: 1Gi
