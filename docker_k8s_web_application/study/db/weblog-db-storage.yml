@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: storage-volume
+  name: storage-volume-0
   namespace: default
   labels:
     app: weblog
@@ -13,7 +13,45 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/data/storage" # minikubeにこのディレクトリを作成しておく
+    path: "/data/pv0000" # minikubeにこのディレクトリを作成しておく　DB server x3 のレプリカを作るのでvolumeも3つ用意
+    type: Directory
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: storage-volume-1
+  namespace: default
+  labels:
+    app: weblog
+    type: storage
+spec:
+  storageClassName: slow
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data/pv0001" # minikubeにこのディレクトリを作成しておく　DB server x3 のレプリカを作るのでvolumeも3つ用意
+    type: Directory
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: storage-volume-2
+  namespace: default
+  labels:
+    app: weblog
+    type: storage
+spec:
+  storageClassName: slow
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data/pv0002" # minikubeにこのディレクトリを作成しておく　DB server x3 のレプリカを作るのでvolumeも3つ用意
     type: Directory
 
 ---
@@ -32,24 +70,43 @@ data:
   root_username: YWRtaW4=
 
 ---
+# volumeClaimTemplatesとしてテンプレート化したのでコメントアウト
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: storage-claim
+#   labels:
+#     app: weblog
+#     type: storage
+# spec:
+#   storageClassName: slow
+#   accessModes:
+#     - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 1Gi
+
+---
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: Service
 metadata:
-  name: storage-claim
+  name: db-svc # StatefulSetと同じもの
+  namespace: default
   labels:
     app: weblog
-    type: storage
+    type: database
 spec:
-  storageClassName: slow
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Gi
+  ports:
+    - port: 27017
+      targetPort: 27017
+  clusterIP: None # clusterIPをNoneに指定することでヘッドレスサービスであることを明示する-> つまりServiceを経由したりLBしないで直接バックエンドの複数のポッドに対してそのIPアドレスを取得して通信できる。これが「DNSラウンドロピンに似ている」と言われる所以だろう
+  selector:
+    app: weblog
+    type: database # app: weblog, type: databaseのPodに転送を行うService
 
 ---
 apiVersion: apps/v1
-kind: StatefulSet # Pod
+kind: StatefulSet # Podを束ねる
 metadata:
   name: mongodb
   namespace: default
@@ -62,6 +119,7 @@ spec:
       app: weblog
       type: database
   serviceName: db-svc
+  replicas: 3
   template:
     metadata: # ここから下が最初Podだったもの
       name: mongodb
@@ -85,6 +143,9 @@ spec:
           args: # 以下がDockerfileでENTRYPOINTに指定した.shの引数として渡されるはず
             - "mongod"
             - "--auth"
+            - "--clusterAuthMode=keyFile" # replication用設定
+            - "--keyFile=/home/mongodb/keyfile" # replication用設定
+            - "--replSet=rs0" # replication用設定
             - "--bind_ip_all"
           env:
             - name: "MONGO_INITDB_ROOT_USERNAME"
@@ -116,13 +177,13 @@ spec:
                 path: keyfile
                 mode: 0700
 
-    volumeClaimTemplates:
-      - metadata:
-          name: storage
-        spec:
-          storageClassName: slow
-          accessModes:
-            - ReadWriteMany
-          resources:
-            requests:
-              storage: 1Gi
+  volumeClaimTemplates:
+    - metadata:
+        name: storage
+      spec:
+        storageClassName: slow
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 1Gi

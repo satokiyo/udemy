@@ -11,7 +11,7 @@ spec:
   capacity:
     storage: 1Gi
   accessModes:
-  - ReadWriteMany
+    - ReadWriteMany
   hostPath:
     path: "/data/pv0000"
     type: Directory
@@ -30,7 +30,7 @@ spec:
   capacity:
     storage: 1Gi
   accessModes:
-  - ReadWriteMany
+    - ReadWriteMany
   hostPath:
     path: "/data/pv0001"
     type: Directory
@@ -49,7 +49,7 @@ spec:
   capacity:
     storage: 1Gi
   accessModes:
-  - ReadWriteMany
+    - ReadWriteMany
   hostPath:
     path: "/data/pv0002"
     type: Directory
@@ -95,49 +95,49 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - name: mongodb
-        image: weblog-db:v1.0.0
-        imagePullPolicy: Never
-        args:
-        - "mongod"
-        - "--auth"
-        - "--clusterAuthMode=keyFile"
-        - "--keyFile=/home/mongodb/keyfile"
-        - "--replSet=rs0"
-        - "--bind_ip_all"
-        env:
-        - name: "MONGO_INITDB_ROOT_USERNAME"
-          valueFrom:
-            secretKeyRef:
-              name: mongo-secret
-              key: root_username
-        - name: "MONGO_INITDB_ROOT_PASSWORD"
-          valueFrom:
-            secretKeyRef:
-              name: mongo-secret
-              key: root_password
-        - name: "MONGO_INITDB_DATABASE"
-          value: "admin"
-        volumeMounts:
-        - mountPath: /data/db
-          name: storage
-        - mountPath: /home/mongodb
-          name: secret
+        - name: mongodb
+          image: weblog-db:v1.0.0
+          imagePullPolicy: Never
+          args:
+            - "mongod"
+            - "--auth"
+            - "--clusterAuthMode=keyFile"
+            - "--keyFile=/home/mongodb/keyfile"
+            - "--replSet=rs0"
+            - "--bind_ip_all"
+          env:
+            - name: "MONGO_INITDB_ROOT_USERNAME"
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: root_username
+            - name: "MONGO_INITDB_ROOT_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: root_password
+            - name: "MONGO_INITDB_DATABASE"
+              value: "admin"
+          volumeMounts:
+            - mountPath: /data/db
+              name: storage
+            - mountPath: /home/mongodb
+              name: secret
       volumes:
-      - name: secret
-        secret:
-          secretName: mongo-secret
-          items:
-          - key: keyfile
-            path: keyfile
-            mode: 0700
+        - name: secret
+          secret:
+            secretName: mongo-secret
+            items:
+              - key: keyfile
+                path: keyfile
+                mode: 0700
   volumeClaimTemplates:
-  - metadata:
-      name: storage
-    spec:
-      storageClassName: slow
-      accessModes:
-      - ReadWriteMany
-      resources:
-        requests:
-          storage: 1Gi
+    - metadata:
+        name: storage
+      spec:
+        storageClassName: slow
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 1Gi
